@@ -41,7 +41,7 @@ hardware board. This enables software testing directly on GitHub repositories.
 
 1. Open the ![CMSIS View](./images/cmsis-view.png) **CMSIS** view.
 2. If the current target set context **avh** in the status bar shows a red background, click on the three dots and
-   select **Refresh (reload packs, update RTE). This will trigger a project update with the arm tool license
+   select **Refresh (reload packs, update RTE)**. This will trigger a project update with the arm tool license
    you have added previously.
 3. Click on ![Build button](./images/build.png) **Build solution** to start the build process. The build should finish
    without errors or warnings.
