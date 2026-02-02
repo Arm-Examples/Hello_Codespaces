@@ -1,107 +1,73 @@
 # Hello, Codespaces
 
-This repository builds an ELF file that prints "Hello ,Codespaces!" and a counter value via semihosting output on an
+This repository builds an ELF file that prints "Hello, Codespaces!" and a counter value via semihosting output on an
 Arm FVP simulation model (Cortex-M3).
 
 ## Quick Start
 
 1. Click on **Use this Template** (in the top right corner) and select **Create a new Repository**.
-2. Enter a name for the new repository.
-3. 
-4. Compile with [**Keil Studio for VS Code**](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack) on your desktop computer.
-   - Install **Keil Studio for VS Code** from the Visual Studio Code Marketplace.
-   - **Clone your repository** to a folder on the desktop computer for example using Git in VS Code.
-   - Open the folder in VS Code and the [CMSIS View](https://mdk-packs.github.io/vscode-cmsis-solution-docs/userinterface.html#2-main-area-of-the-cmsis-view).
-   - Use the [Action buttons](https://github.com/ARM-software/vscode-cmsis-csolution?tab=readme-ov-file#action-buttons) to build, load, and run the example on the pre-configured AVH-SSE-300 FastModel simulation.
+2. Enter a name for the new repository and click on **Create repository**. The new repository opens in your browser.
+3. Click on the drop down next to **<> Code** and select **Codespaces**.
+4. Click on **Create codespace on main**.
 
-You may now [Customize the Model](#customize-the-model) for your own application or [Add Board Layer for Target Hardware](#add-board-layer-for-target-hardware) to run the example on an evaluation board.
+> [!NOTE]
+> The first time you create the Codespace will take a while as it installs the tools as described in the
+> [`devcontainer.json`](.devcontainer/devcontainer.json) file.
 
+During the process, you will see a pop up like this:
 
+![Arm Environment Activation](./images/environment-activation.png)
 
-## How to setup your GitHub Codespace
+Click on **Allow For Current Workspace**. This will install the tools specified in the
+[`vcpkg-configuration.json`](./vcpkg-configuration.json) file automatically into your codespace.
 
-1. Download & Install [Microsoft Visual Studio Code](https://code.visualstudio.com/download) for your operating system.
-2. Launch Visual Studio Code. From the 'View' menu open 'Extensions' (ctrl+shift+x). Search for "Keil Studio Pack" and select the install button.
-3. From the 'View' menu open 'Source Control'. Select 'Clone Repository' and copy the url: https://github.com/Open-CMSIS-Pack/vscode-get-started into the input dialog
-4. Specify the destination folder to clone to and select 'Open' when asked 'Would you like to open the cloned directory?'
-5. Open the 'Explorer' view (ctrl-shift-e) and select the file 'vcpkg-configuration.json'. This file instructs [Microsoft vcpkg](https://github.com/microsoft/vcpkg-tool#vcpkg-artifacts) to install the prerequisite artifacts required for building the solution and puts it into the PATH: cmake, ninja, cmsis-toolbox as well as arm-none-eabi-gcc.
-6. Open the 'CMSIS' view from the side bar and press the 'Build' button. The last line of the ninja build output will tell you where you can
-find the application elf file. Alternatively you can select 'Build' or 'Rebuild' from the context menu of the `*.csolution.yml` file of the solution context
-(e.g. get_started.csolution.yml) to build all contexts of the solution.
+When the installation finishes, you will see a pop up in the bottom right corner:
 
-Note: Any terminal that is opened within VSCode after vcpkg got activated for the folder, will have all the above tools added to the path.
-This allows you to run tools from the [CMSIS-Toolbox](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/blob/main/docs/build-tools.md) like:
+![Manage Arm License](./images/manage-arm-license.png)
 
-- [`cpackget`](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/blob/main/docs/build-tools.md#cpackget-invocation) for installing and uninstalling CMSIS-Packs
-- [`csolution`](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/blob/main/docs/build-tools.md#csolution-invocation) for updating, validating and converting from the CMSIS Project Management [YML input format](https://github.com/Open-CMSIS-Pack/devtools/blob/main/tools/projmgr/docs/Manual/YML-Input-Format.md#yaml-input-format)
-  to the CMSIS Build [XML `cprj` format](https://open-cmsis-pack.github.io/devtools/buildmgr/latest/element_cprj.html) used by `cbuildgen`.
-- [`cbuild`](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/blob/main/docs/build-tools.md#cbuild-invocation) for an orchestrated build of one or more `configurations` of a csolution.
+Click on **Manage Arm license** to select from the available options. For evaluation purposes, you can use the Arm Keil
+MDK-Community edition:
 
-## Additional Tools
+![Activate Arm Keil MDK Community Edition](./images/mdk-community.png)
 
-- Other Arm Tools available via [vcpkg](https://www.keil.arm.com/packages/) e.g.:
-  - Models: [Arm Virtual Hardware for Cortex-M based on FastModels](https://www.keil.arm.com/packages/#models/arm/avh-fvp)
-  - Toolchain: [Arm Compiler for Embedded](https://www.keil.arm.com/packages/#compilers/arm/armclang)
-  - Debugger: [Arm Debugger](https://www.keil.arm.com/artifacts/#debuggers/arm/armdbg)
+> [!NOTE]
+> If you missed the pop up, you can activate a license by clicking on the
+> ![No Arm License](./images/no-arm-license.png) notification in the status bar.
 
-## Project Structure
+## Build and Run
 
-The project is written in the [`CMSIS-Toolbox Project Format`](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/blob/main/docs/YML-Input-Format.md):
+The project is configured for execution on an Arm Cortex-M3 FVP. Using a model removes the requirement for a physical
+hardware board. This enables software testing directly on GitHub repositories.
 
-- [`cdefault.yml`] is located in the ./etc directory of the CMSIS-Toolbox. It sets the default toolchain specific command line options for supported toolchains.
-  In case a solution specific version is required, you can copy the file locally and it will be used by the tools instead.
-- [`get_started.csolution.yml`](./get_started.csolution.yml) lists and defines the required packs, hardware targets, build-types and projects.
-- [`hello/hello.cproject.yml`](./hello/hello.cproject.yml) defines components and source files.
+1. Open the ![CMSIS View](./images/cmsis-view.png) **CMSIS** view.
+2. If the current target set context **avh** in the status bar shows a red background, click on the three dots and
+   select **Refresh (reload packs, update RTE). This will trigger a project update with the arm tool license
+   you have added previously.
+3. Click on ![Build button](./images/build.png) **Build solution** to start the build process. The build should finish
+   without errors or warnings.
+4. Click on ![Run button](./images/run.png) **Load & Run application** to run the image on the simulation model. The
+   **tTerminal** shows the output `Hello, Codespaces! XX`.
 
-## Build Solution/Project
+> [!NOTE]
+> The simulation stops automatically after 120 seconds runtime.
 
-Use the `cbuild` command from CMSIS-Toolbox to generate and build one or all configurations of the solution:
+## Repository Structure
 
-- find out which `contexts` are specified by the solution:
-
-  ```bash
-  cbuild list contexts get_started.csolution.yml
-  hello.debug+avh
-  hello.release+avh
-  ```
-
-- build the context `hello.debug+avh` and install the required CMSIS Packs if not installed:
-
-  ```bash
-  cbuild get_started.csolution.yml --packs --update-rte --context hello.debug+avh
-  info cbuild: Build Invocation 2.2.1 (C) 2023 Arm Ltd. and Contributors
-  /tmp/vscode-get-started/get_started.cbuild-idx.yml - info csolution: file generated successfully
-  /tmp/vscode-get-started/hello/hello.debug+avh.cbuild.yml - info csolution: file generated successfully
-  /tmp/vscode-get-started/get_started.cbuild-pack.yml - info csolution: file is already up-to-date
-  /tmp/vscode-get-started/hello/hello.debug+avh.cprj - info csolution: file generated successfully
-  info cbuild: Processing 1 context(s)
-  info cbuild: Retrieve build information for context: "hello.debug+avh"
-  ======================================================
-  info cbuild: (1/1) Building context: "hello.debug+avh"
-
-  M650: Command completed successfully.
-
-  M652: Generated file for project build: '/tmp/vscode-get-started/tmp/hello/avh/debug/CMakeLists.txt'
-  :
-  info cbuild: build finished successfully!
-  ```
-
-- build the configuration `.debug+avh` using Arm Compiler 6 (AC6)
-  Add the Arm Compiler for Embedded 6 e.g. via vcpkg (`vcpkg use armclang`) and rebuild the context specifying
-  `--rebuild` and the required compiler `--toolchain AC6`:
-
-  ```bash
-  cbuild get_started.csolution.yml --context .debug+avh --packs --update-rte --rebuild --toolchain AC6
-  ```
-
-## Execute Project
-
-The project is configured for execution on Arm Virtual Hardware (AVH) modelling an MPS2 board running an Arm Cortex-M3 processor.
-This model is part of the MDK Professional Edition and removes the requirement for a physical hardware board. It *DOES NOT WORK* with the 
-MDK Community Edition.
-
-Note: depending on the toolchain used the extension of the application file is either `elf` (GCC, Clang) or `axf` (AC6):
-
-```bash
-FVP_MPS2_Cortex-M3 -f fvp-config.txt -a out/hello/avh/debug/hello.axf
+```txt
+  📦
+  ┣ 📂 .devcontainer                    Development container control files
+     ┗ 📄 devcontainer.json              Installs the required VS Code extensions (Keil Studio Pack)
+  ┣ 📂 .vscode                          VS Code specific settings files
+     ┗ 📄 tasks.json                     Contains the load & run command the starts the Arm FVP model
+  ┣ 📂 hello                            Project files
+     ┣ 📂 RTE                            Run-time environment related files
+     ┣ 📄 hello.cproject.yml             Project file in CMSIS solution format
+     ┗ 📄 main.c                         C code
+  ┣ 📂 images                           Images for this README.md file
+  ┣ 📄 .gitignore                       List of files not to be committed to Git
+  ┣ 📄 fvp-config.txt                   Arm FVP configuration file 
+  ┣ 📄 hello_codespaces.csolution.yml   CMSIS Solution file 
+  ┣ 📄 LICENSE                          Apache 2.0 license file
+  ┣ 📄 README.md                        This file
+  ┗ 📄 vcpkg-configuration.json         Tools configuration file
 ```
