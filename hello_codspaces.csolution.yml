@@ -1,0 +1,41 @@
+solution:
+  created-for: CMSIS-Toolbox@2.12.0
+  cdefault:
+
+  select-compiler:
+    - compiler: GCC
+    - compiler: AC6
+    - compiler: CLANG
+
+  packs:
+    - pack: ARM::CMSIS
+    - pack: ARM::Cortex_DFP
+    - pack: ARM::CMSIS-RTX
+
+  target-types:
+    - type: avh # runs on Arm Virtual Hardware
+      device: ARMCM3 # add more hardware targets (don't forget to add the required packs)
+      target-set:
+        - set:
+          images:
+            - project-context: hello.debug
+          debugger:
+            name: Arm-FVP
+            model: FVP_MPS2_Cortex-M3
+            config-file: fvp-config.txt
+            args: --simlimit 120
+
+  build-types:
+    # defines toolchain options for 'debug' and 'release'
+    - type: debug
+      optimize: debug
+      debug: on
+
+    - type: release
+      optimize: balanced
+      debug: off
+
+  projects:
+    # list related projects
+    - project: ./hello/hello.cproject.yml
+  compiler: AC6

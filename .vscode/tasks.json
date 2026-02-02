@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMSIS Load+Run",
+            "problemMatcher": [],
+            "type": "shell",
+            "command": "FVP_MPS2_Cortex-M3",
+            "options": {
+                "cwd": "${workspaceFolder}/",
+                "shell": {
+                    "executable": "/bin/bash",
+                    "args": [
+                        "-c"
+                    ]
+                }
+            },
+            "args": [
+                "-f",
+                "fvp-config.txt",
+                "--simlimit",
+                "120",
+                "-a",
+                "out/hello/avh/debug/hello.axf",
+                ""
+            ]
+        }
+    ]
+}
