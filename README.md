@@ -5,9 +5,9 @@ an [Arm FVP](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20
 (Cortex-M3).
 
 A [codespace](https://docs.github.com/en/codespaces/about-codespaces/what-are-codespaces) is a development environment
-that's hosted in the cloud. Each codespace you create is hosted by GitHub in aDocker container, running on a virtual
+that's hosted in the cloud. Each codespace you create is hosted by GitHub in a Docker container, running on a virtual
 machine. Regardless of your local operating system, your codespace will run in a Linux environment. You can connect to
-your codespaces from your browser, from Visual Studio Code, or by using GitHub CLI. 
+your codespaces from your browser, from Visual Studio Code, or by using GitHub CLI.
 
 ## Quick Start
 
