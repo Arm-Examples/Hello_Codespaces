@@ -1,7 +1,8 @@
 # Hello, Codespaces
 
-This repository builds an ELF file that prints "Hello, Codespaces!" and a counter value via semihosting output on an
-Arm FVP simulation model (Cortex-M3).
+This repository contains an application that prints "Hello, Codespaces!" and a counter value via semihosting output on
+an [Arm FVP](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms) simulation model
+(Cortex-M3).
 
 ## Quick Start
 
@@ -46,7 +47,31 @@ hardware board. This enables software testing directly on GitHub repositories.
 3. Click on ![Build button](./images/build.png) **Build solution** to start the build process. The build should finish
    without errors or warnings.
 4. Click on ![Run button](./images/run.png) **Load & Run application** to run the image on the simulation model. The
-   **tTerminal** shows the output `Hello, Codespaces! XX`.
+   **Terminal** shows the output:
+
+```txt
+ *  Executing task: FVP_MPS2_Cortex-M3 -f fvp-config.txt --simlimit 120 -a out/hello/avh/debug/hello.axf  
+
+Info: FVP_MPS2_Cortex_M3: telnetterminal0: Listening for serial connection on port 5000
+Info: FVP_MPS2_Cortex_M3: telnetterminal1: Listening for serial connection on port 5001
+Info: FVP_MPS2_Cortex_M3: telnetterminal2: Listening for serial connection on port 5002
+Hello, Codespaces! 0
+Hello, Codespaces! 1
+Hello, Codespaces! 2
+Hello, Codespaces! 3
+Hello, Codespaces! 4
+Hello, Codespaces! 5
+Hello, Codespaces! 6
+Hello, Codespaces! 7
+Hello, Codespaces! 8
+Hello, Codespaces! 9
+Hello, Codespaces! 10
+Hello, Codespaces! 11
+...
+
+Info: Simulation is stopping. Reason: Simulated time has been exceeded.
+Info: /OSCI/SystemC: Simulation stopped by user.
+```
 
 > [!NOTE]
 > The simulation stops automatically after 120 seconds runtime.
@@ -58,7 +83,7 @@ hardware board. This enables software testing directly on GitHub repositories.
   ┣ 📂 .devcontainer                    Development container control files
      ┗ 📄 devcontainer.json              Installs the required VS Code extensions (Keil Studio Pack)
   ┣ 📂 .vscode                          VS Code specific settings files
-     ┗ 📄 tasks.json                     Contains the load & run command the starts the Arm FVP model
+     ┗ 📄 tasks.json                     Load & run commands to start the Arm FVP model
   ┣ 📂 hello                            Project files
      ┣ 📂 RTE                            Run-time environment related files
      ┣ 📄 hello.cproject.yml             Project file in CMSIS solution format
