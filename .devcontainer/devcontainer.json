@@ -2,7 +2,7 @@
     "customizations": {
         "vscode": {
            "extensions": [
-                "arm.keil-studio-pack@1.18.4"
+                "arm.keil-studio-pack"
             ]
         }
     }   
