@@ -27,14 +27,20 @@ During the process, you will see a pop up like this:
 Click on **Allow For Current Workspace**. This will install the tools specified in the
 [`vcpkg-configuration.json`](./vcpkg-configuration.json) file automatically into your codespace.
 
-When the installation finishes, you will see a pop up in the bottom right corner:
+### Licensing
+
+Arm tools require a valid license. When the installation finishes, you will see a pop up in the bottom right corner:
 
 ![Manage Arm License](./images/manage-arm-license.png)
 
-Click on **Manage Arm license** to select from the available options. For evaluation purposes, you can use the Arm Keil
-MDK-Community edition:
+Click on **Manage Arm license** to select from the available options. For *evaluation* purposes, you can use the Arm
+Keil MDK-Community edition:
 
 ![Activate Arm Keil MDK Community Edition](./images/mdk-community.png)
+
+For commercial projects, please obtain a license from your
+[local distributor](https://www.arm.com/products/development-tools/distributors) or our
+[eStore](https://store.arm.com/mdk-6/)
 
 > [!NOTE]
 > If you missed the pop up, you can activate a license by clicking on the
@@ -55,11 +61,8 @@ hardware board. This enables software testing directly on GitHub repositories.
    **Terminal** shows the output:
 
 ```txt
- *  Executing task: FVP_MPS2_Cortex-M3 -f fvp-config.txt --simlimit 120 -a out/hello/avh/debug/hello.axf  
+ *  Executing task: FVP_MPS2_Cortex-M3 -f fvp-config.txt -a out/hello/avh/debug/hello.axf  
 
-Info: FVP_MPS2_Cortex_M3: telnetterminal0: Listening for serial connection on port 5000
-Info: FVP_MPS2_Cortex_M3: telnetterminal1: Listening for serial connection on port 5001
-Info: FVP_MPS2_Cortex_M3: telnetterminal2: Listening for serial connection on port 5002
 Hello, Codespaces! 0
 Hello, Codespaces! 1
 Hello, Codespaces! 2
@@ -70,23 +73,25 @@ Hello, Codespaces! 6
 Hello, Codespaces! 7
 Hello, Codespaces! 8
 Hello, Codespaces! 9
-Hello, Codespaces! 10
-Hello, Codespaces! 11
-...
+Simulation complete – shutting down via semihosting.
 
-Info: Simulation is stopping. Reason: Simulated time has been exceeded.
 Info: /OSCI/SystemC: Simulation stopped by user.
 ```
+### Run manually
 
-> [!NOTE]
-> The simulation stops automatically after 120 seconds runtime.
+Instead of using the ![Run button](./images/run.png) **Load & Run application** command in the **CMSIS** view, you can
+run the model manually. In a **Terminal**, run:
+
+```sh
+FVP_MPS2_Cortex-M3 -f fvp-config.txt -a out/hello/avh/debug/hello.axf
+```
 
 ## Repository Structure
 
 ```txt
   📦
   ┣ 📂 .devcontainer                    Development container control files
-     ┗ 📄 devcontainer.json              Installs the required VS Code extensions (Keil Studio Pack)
+     ┗ 📄 devcontainer.json              Installs the required VS Code extensions
   ┣ 📂 .vscode                          VS Code specific settings files
      ┗ 📄 tasks.json                     Load & run commands to start the Arm FVP model
   ┣ 📂 hello                            Project files

@@ -23,7 +23,6 @@ solution:
             name: Arm-FVP
             model: FVP_MPS2_Cortex-M3
             config-file: fvp-config.txt
-            args: --simlimit 120
 
   build-types:
     # defines toolchain options for 'debug' and 'release'
