@@ -5,6 +5,7 @@
                 "arm.cmsis-solution",
                 "arm.environment-manager",
                 "llvm-vs-code-extensions.vscode-clangd"
+            ]
         }
-    }   
+    }
 }
