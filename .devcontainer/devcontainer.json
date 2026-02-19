@@ -2,8 +2,9 @@
     "customizations": {
         "vscode": {
            "extensions": [
-                "arm.keil-studio-pack"
-            ]
+                "arm.cmsis-solution",
+                "arm.environment-manager",
+                "llvm-vs-code-extensions.vscode-clangd"
         }
     }   
 }
