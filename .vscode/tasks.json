@@ -18,8 +18,6 @@
             "args": [
                 "-f",
                 "fvp-config.txt",
-                "--simlimit",
-                "120",
                 "-a",
                 "out/hello/avh/debug/hello.axf",
                 ""
