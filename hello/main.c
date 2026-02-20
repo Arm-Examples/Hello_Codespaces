@@ -28,25 +28,7 @@
 #include CMSIS_device_header
 #include "cmsis_os2.h"
 #include <stdio.h>
-
-// Semihosting: request codes and reason codes
-#define SYS_EXIT                      0x18
-#define ADP_Stopped_ApplicationExit   0x20026
-
-/*---------------------------------------------------------------------------
-  Shut down the FVP simulation via semihosting SYS_EXIT.
- *---------------------------------------------------------------------------*/
-static inline __attribute__((noreturn)) void semihost_exit(void) {
-  __asm volatile (
-    "mov  r0, %[op]   \n"   // SYS_EXIT operation
-    "mov  r1, %[reason]\n"   // ADP_Stopped_ApplicationExit
-    "bkpt #0xab        \n"   // semihosting trap (Thumb)
-    :
-    : [op] "r" (SYS_EXIT), [reason] "r" (ADP_Stopped_ApplicationExit)
-    : "r0", "r1"
-  );
-  __builtin_unreachable();
-}
+#include <stdlib.h>
 
 static   osThreadId_t tid_thrPRINTF;       // Thread id of thread: thrPRINTF
 
@@ -66,7 +48,7 @@ static void thrPRINTF (void *arg) {
     osDelay (1000);
   }
   printf("Simulation complete – shutting down via semihosting.\n");
-  semihost_exit();              // clean FVP shutdown via SYS_EXIT
+  exit(0);                              // clean FVP shutdown via SYS_EXIT
 }
 
 /*---------------------------------------------------------------------------
